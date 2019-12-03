@@ -28,7 +28,7 @@ export type MonetizationStartEvent = MonetizationEvent
 export type MonetizationStopEvent = MonetizationEvent
 export type MonetizationProgressEvent = CustomEvent<MonetizationProgressEventDetail>
 
-interface MonetizationEventMap {
+export interface MonetizationEventMap {
   monetizationpending: MonetizationPendingEvent
   monetizationstart: MonetizationStartEvent
   monetizationstop: MonetizationStopEvent
