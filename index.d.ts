@@ -27,10 +27,21 @@ export interface MonetizationProgressEventDetail extends MonetizationEventDetail
 
 export type MonetizationEvent = CustomEvent<MonetizationEventDetail>
 
-export type MonetizationPendingEvent = MonetizationEvent
-export type MonetizationStartEvent = MonetizationEvent
-export type MonetizationStopEvent = CustomEvent<MonetizationProgressEventDetail>
-export type MonetizationProgressEvent = CustomEvent<MonetizationProgressEventDetail>
+export interface MonetizationPendingEvent extends MonetizationEvent {
+  type: 'monetizationpending'
+}
+
+export interface MonetizationStartEvent extends MonetizationEvent {
+  type: 'monetizationstart'
+}
+
+export interface MonetizationStopEvent extends CustomEvent<MonetizationProgressEventDetail> {
+  type: 'monetizationstop'
+}
+
+export interface MonetizationProgressEvent extends CustomEvent<MonetizationProgressEventDetail> {
+  type: 'monetizationprogress'
+}
 
 export interface MonetizationEventMap {
   monetizationpending: MonetizationPendingEvent
