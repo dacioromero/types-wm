@@ -1,18 +1,22 @@
-interface TEventListener<T extends Event = Event> {
+interface IEventListener<T extends Event = Event> {
   (evt: T): void
 }
 
-interface TEventListenerObject<T extends Event = Event> {
+interface IEventListenerObject<T extends Event = Event> {
   handleEvent(evt: T): void
 }
 
-type TEventListenerOrListenerObject<T extends Event = Event> =
-  | TEventListener<T>
-  | TEventListenerObject<T>
+type IEventListenerOrListenerObject<T extends Event = Event> =
+  | IEventListener<T>
+  | IEventListenerObject<T>
 
 export interface MonetizationEventDetail {
   paymentPointer: string
   requestId: string
+}
+
+export interface MonetizationProgressEventDetail extends MonetizationEventDetail {
+  finalized: boolean
 }
 
 export interface MonetizationProgressEventDetail extends MonetizationEventDetail {
@@ -25,7 +29,7 @@ export type MonetizationEvent = CustomEvent<MonetizationEventDetail>
 
 export type MonetizationPendingEvent = MonetizationEvent
 export type MonetizationStartEvent = MonetizationEvent
-export type MonetizationStopEvent = MonetizationEvent
+export type MonetizationStopEvent = CustomEvent<MonetizationProgressEventDetail>
 export type MonetizationProgressEvent = CustomEvent<MonetizationProgressEventDetail>
 
 export interface MonetizationEventMap {
@@ -43,13 +47,13 @@ export interface Monetization extends EventTarget {
 
   addEventListener<T extends keyof MonetizationEventMap>(
     type: T,
-    listener: TEventListenerOrListenerObject<MonetizationEventMap[T]> | null,
+    listener: IEventListenerOrListenerObject<MonetizationEventMap[T]> | null,
     options?: boolean | AddEventListenerOptions
   ): void
 
   removeEventListener<T extends keyof MonetizationEventMap>(
     type: T,
-    listener: TEventListenerOrListenerObject<MonetizationEventMap[T]> | null,
+    listener: IEventListenerOrListenerObject<MonetizationEventMap[T]> | null,
     options?: EventListenerOptions | boolean
   ): void
 }

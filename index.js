@@ -1,1 +1,1 @@
-// Placeholder file
+module.exports = {}
