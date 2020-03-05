@@ -25,13 +25,13 @@ export interface MonetizationProgressEventDetail extends MonetizationEventDetail
   assetScale: number
 }
 
-export type MonetizationEvent = CustomEvent<MonetizationEventDetail>
+type GenericMonetizationEvent = CustomEvent<MonetizationEventDetail>
 
-export interface MonetizationPendingEvent extends MonetizationEvent {
+export interface MonetizationPendingEvent extends GenericMonetizationEvent {
   type: 'monetizationpending'
 }
 
-export interface MonetizationStartEvent extends MonetizationEvent {
+export interface MonetizationStartEvent extends GenericMonetizationEvent {
   type: 'monetizationstart'
 }
 
@@ -49,6 +49,8 @@ export interface MonetizationEventMap {
   monetizationstop: MonetizationStopEvent
   monetizationprogress: MonetizationProgressEvent
 }
+
+export type MonetizationEvent = MonetizationEventMap[keyof MonetizationEventMap]
 
 export type MonetizationState = 'stopped' | 'pending' | 'started'
 
