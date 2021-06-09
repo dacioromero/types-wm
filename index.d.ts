@@ -23,6 +23,7 @@ interface MonetizationProgressEventDetail extends BaseMonetizationEventDetail {
   amount: string
   assetCode: string
   assetScale: number
+  receipt?: string
 }
 
 export interface MonetizationProgressEvent extends CustomEvent<MonetizationProgressEventDetail> {
