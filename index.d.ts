@@ -71,5 +71,10 @@ export interface Monetization extends EventTarget {
 declare global {
   interface Document {
     monetization?: Monetization
+    monetizationExtensionInstalled?: boolean
+    coilMonetizationPolyfill?: {
+      init: (payload: { btpToken: string }) => void
+      refreshBtpToken: (btpToken: string) => void
+    }
   }
 }
